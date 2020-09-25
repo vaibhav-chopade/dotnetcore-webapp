@@ -9,10 +9,10 @@ trigger:
 
 pool:
   vmImage: 'windows-2019'
+
 steps:
   - 
 - task: DotNetCoreCLI@2
-  displayName: 'dotnet restore'
   inputs:
     command: 'restore'
     projects: 'dotnetcore-webapp.csproj'
