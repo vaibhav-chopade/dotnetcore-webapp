@@ -4,7 +4,6 @@
 # https://aka.ms/yaml
 
 trigger:
-- master
 - azure-pipelines-ado
 
 pool:
@@ -12,7 +11,27 @@ pool:
 
 steps:
 - task: DotNetCoreCLI@2
+  displayName: 'dotnet restore'
   inputs:
     command: 'restore'
     projects: 'dotnetcore-webapp.csproj'
     feedsToUse: 'select'
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet build'
+  inputs:
+    command: 'build'
+    projects: 'dotnetcore-webapp.csproj'
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet publish'
+  inputs:
+    command: 'publish'
+    publishWebProjects: true
+
+- task: PublishBuildArtifacts@1
+  displayName: 'build artifacts'
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
