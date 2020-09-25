@@ -10,6 +10,13 @@ pool:
   vmImage: 'windows-2019'
 
 steps:
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'ado-integration-for-prakash-org'
+    organization: 'dotnetprakash'
+    scannerMode: 'MSBuild'
+    projectKey: 'dotnetprakash'
+    projectName: 'dotnetprakash'
 - task: DotNetCoreCLI@2
   displayName: 'dotnet restore'
   inputs:
@@ -22,6 +29,12 @@ steps:
   inputs:
     command: 'build'
     projects: 'dotnetcore-webapp.csproj'
+
+- task: SonarCloudAnalyze@1
+
+- task: SonarCloudPublish@1
+  inputs:
+    pollingTimeoutSec: '300'
 
 - task: DotNetCoreCLI@2
   displayName: 'dotnet publish'
