@@ -21,7 +21,10 @@ steps:
   displayName: 'dotnet restore'
   inputs:
     command: 'restore'
-    projects: 'dotnetcore-webapp.csproj'
+    projects: '- task: DotNetCoreCLI@2
+  inputs:
+    command: 'test'
+    projects: 'dotnetcore-webapp.csproj''
     feedsToUse: 'select'
 
 - task: DotNetCoreCLI@2
