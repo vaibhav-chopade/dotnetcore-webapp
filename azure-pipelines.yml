@@ -17,6 +17,7 @@ steps:
     command: 'restore'
     projects: 'dotnetcore-webapp.csproj'
     feedsToUse: 'select'
+    vstsFeed: '04026f9a-aa91-4098-980b-fa301d1dbce9/acab9c0c-85c5-466d-b030-93c4eb70da75'
 
 
 - task: DotNetCoreCLI@2
