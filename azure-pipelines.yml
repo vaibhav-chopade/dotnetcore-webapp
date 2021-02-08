@@ -34,3 +34,4 @@ steps:
     ArtifactName: 'drop'
     publishLocation: 'Container'
 - task: SonarCloudAnalyze@1
+  displayName: Sonar-code-analysis
