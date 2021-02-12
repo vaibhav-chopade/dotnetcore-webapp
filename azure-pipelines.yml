@@ -27,8 +27,6 @@ steps:
   inputs:
     command: 'publish'
     publishWebProjects: true
-- task: SonarCloudAnalyze@1
-  displayName: Sonar-code-analysis
 - task: PublishBuildArtifacts@1
   displayName: Publish-the-artifacts
   inputs:
