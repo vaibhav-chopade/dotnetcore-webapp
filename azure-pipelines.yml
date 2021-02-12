@@ -38,6 +38,6 @@ steps:
 - task: Docker@2
   inputs:
     containerRegistry: 'Docker-to DEvOps'
-    repository: 'my_docker_image'
+    repository: 'my_docker_image_for_vc'
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
