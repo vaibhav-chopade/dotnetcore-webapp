@@ -4,33 +4,35 @@
 # https://aka.ms/yaml
 
 trigger:
-- main
+- vc-dotnet-project
 
 pool:
   vmImage: 'windows-2019'
 
 steps:
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'sonar-using k8s-project'
+    organization: 'vaibhav-demo'
+    scannerMode: 'MSBuild'
+    projectKey: 'Vaibhav-Demo_CI-CD-using-the-App-Services'
+    projectName: 'CI-CD using the App Services'
 - task: DotNetCoreCLI@2
-  displayName: .net-restore
   inputs:
     command: 'restore'
-    projects: 'dotnetcore-webapp.csproj'
     feedsToUse: 'select'
+    vstsFeed: 'a0e52a62-7ccc-4114-b089-c422d3aa1d43'
 - task: DotNetCoreCLI@2
-  displayName: .net-build
   inputs:
     command: 'build'
-    projects: 'dotnetcore-webapp.csproj'
-
 - task: DotNetCoreCLI@2
-  displayName: .net- publish
+  inputs:
+    command: 'test'
+- task: DotNetCoreCLI@2
   inputs:
     command: 'publish'
     publishWebProjects: true
-- task: SonarCloudAnalyze@1
-  displayName: Sonar-code-analysis
 - task: PublishBuildArtifacts@1
-  displayName: Publish-the-artifacts
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
